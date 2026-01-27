@@ -13,9 +13,14 @@ def print_student(database: dict, name: str):
                 print(f" {len(database[name])} completed courses:")
 
             grade_sum = 0
-            for i in range(len(database[name])):
-                print(f"  {database[name][i]}")
-                grade_sum += database[name][i][1]
+            for course in database[name]:
+                course_name, grade = course
+                print(f"  {course_name} {grade}")
+                grade_sum += grade
+            if len(database[name]) != 0:    
+                print(f" average grade {grade_sum/len(database[name])}")
+            else:
+                print(f" average grade 0")
 
     else: 
         print(f"{name}: no such person in the database")
@@ -57,29 +62,8 @@ def summary(database: dict):
 if __name__ == "__main__":
     students = {}
     add_student(students, "Peter")
-    add_student(students, "Eliza")
+    add_course(students, "Peter", ("Introduction to Programming", 3))
+    add_course(students, "Peter", ("Advanced Course in Programming", 2))
+    add_course(students, "Peter", ("Data Structures and Algorithms", 0))
+    add_course(students, "Peter", ("Introduction to Programming", 2))
     print_student(students, "Peter")
-    print_student(students, "Eliza")
-    print_student(students, "Jack")
-
-# # Peter:
-# #  no completed courses
-# # Eliza:
-# #  no completed courses
-# # Jack: no such person in the database
-
-    # students = {}
-    # add_student(students, "Peter")
-    # add_course(students, "Peter", ("Introduction to Programming", 3))
-    # add_course(students, "Peter", ("Advanced Course in Programming", 2))
-    # print_student(students, "Peter")
-
-    # students = {}
-    # add_student(students, "Peter")
-    # add_student(students, "Eliza")
-    # add_course(students, "Peter", ("Data Structures and Algorithms", 5))
-    # add_course(students, "Peter", ("Introduction to Programming", 5))
-    # add_course(students, "Peter", ("Advanced Course in Programming", 5))
-    # add_course(students, "Eliza", ("Introduction to Programming", 5))
-    # add_course(students, "Eliza", ("Introduction to Computer Science", 4))
-    # summary(students)
