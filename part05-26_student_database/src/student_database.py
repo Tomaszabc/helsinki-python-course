@@ -13,8 +13,8 @@ def print_student(database: dict, name: str):
                 print(f" {len(database[name])} completed courses:")
 
             grade_sum = 0
-            for course in database[name]:
-                course_name, grade = course
+            for i in database[name]:
+                course_name, grade = i
                 print(f"  {course_name} {grade}")
                 grade_sum += grade
             if len(database[name]) != 0:    
@@ -27,10 +27,18 @@ def print_student(database: dict, name: str):
 
 def add_course(database: dict, name: str, course: tuple):
     if name in database:
-        if database[name] == []:
+        if database[name] == [] and course[1] != 0:
             database[name] = [course]
-        else:
-            database[name].append(course)
+        elif database[name] != []:
+        #Tu sprawdzam czy nie wystepuje ponownie:
+            if course[0] not in database[name][0] and course[1] != 0:
+                database[name].append(course)
+        # tu dodaje zalozenie, ze wynik jest tylko wyzszy:
+        if database[name] != []:
+            for i in range(len(database[name])):
+                if database[name][i][0] == course[0]:
+                    if course[1] > database[name][i][1] and course[1] != 0:
+                        database[name][i] = course
     else:
         print(f"{name}: no such person in the database")
 
@@ -62,8 +70,5 @@ def summary(database: dict):
 if __name__ == "__main__":
     students = {}
     add_student(students, "Peter")
-    add_course(students, "Peter", ("Introduction to Programming", 3))
-    add_course(students, "Peter", ("Advanced Course in Programming", 2))
-    add_course(students, "Peter", ("Data Structures and Algorithms", 0))
-    add_course(students, "Peter", ("Introduction to Programming", 2))
+    add_course(students, "Peter", ("Software Development Methods", 0))
     print_student(students, "Peter")
