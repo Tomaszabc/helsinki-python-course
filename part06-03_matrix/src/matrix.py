@@ -1,6 +1,6 @@
 def read_matrix():
     matrix = []
-    with open("matrix.txt") as file:
+    with open("matrix.txt", encoding='utf-8-sig') as file:
         for line in file:
             line = line.replace("\n", "")
             numbers = line.split(",")
@@ -28,15 +28,17 @@ def matrix_sum():
 
 def matrix_max():
     matrix = read_matrix()
-    start = True
-    maximum = 0
+    maximum = matrix[0][0]
     for row in matrix:
         for number in row:
-            if start or number > maximum:
+            if number > maximum:
                 maximum = number
-    print(number)
+    return maximum
 
+def row_sums():
+    matrix = read_matrix()
+    sums_list = []
+    for row in matrix:
+        sums_list.append(sum(row))
+    return sums_list
 
-read_matrix()
-matrix_sum()
-matrix_max()
