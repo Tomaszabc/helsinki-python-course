@@ -1,16 +1,14 @@
 def read_matrix():
     matrix = []
-    with open("matrix.txt", encoding='utf-8-sig') as file:
+    with open("matrix.txt") as file:  # ZMIANA TUTAJ
         for line in file:
-            line = line.replace("\n", "")
+            line = line.strip()  # użyj strip zamiast replace!
             numbers = line.split(",")
             
-            # Tworzymy wiersz (listę liczb)
             row = []
             for number in numbers:
-                row.append(int(number))  # dodajemy liczbę do wiersza
+                row.append(int(number))
             
-            # Dodajemy CAŁY wiersz do macierzy
             matrix.append(row)
             
     return matrix
@@ -42,3 +40,4 @@ def row_sums():
         sums_list.append(sum(row))
     return sums_list
 
+read_matrix()
