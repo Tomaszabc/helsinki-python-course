@@ -1,6 +1,6 @@
 # wwite your solution here
 def user_input():
-    if False:
+    if True:
         student_info = input("Student information: ")
         exercises_comp = input("Exercises completed: ")
         exam_points = input("Exam points: ")
@@ -70,3 +70,4 @@ def print_data():
 
 
 print_data()
+
