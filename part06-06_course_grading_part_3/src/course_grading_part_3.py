@@ -50,5 +50,6 @@ with open(exam_data) as file:
         exams[parts[0]] = esum
  
 for student_id, name in students.items():
+    print(f"{"name":<30} {"exec_nbr":<10} {"exec_pts.":<10} {"exam_pts.":<10} {"tot_pts.":<10} {"grade":<10}")
     total = exams[student_id] + to_points(exercises[student_id])
-    print(f"{name} {grade(total)}")
+    print(f"{name:<30} {exec_nbr:<10} {exec_pts:<10} {exam_pts:<10} {tot_pts:<10}{ grade(total):<10}")
