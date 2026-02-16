@@ -1,5 +1,5 @@
 # tee ratkaisu tänne
-if False:
+if True:
     student_data = input("Student information: ")
     exercise_data = input("Exercises completed: ")
     exam_data = input("Exam points: ")
@@ -49,7 +49,8 @@ with open(exam_data) as file:
             esum += int(parts[i])
         exams[parts[0]] = esum
  
+print(f"{'name':<30}{'exec_nbr':<10}{'exec_pts.':<10}{'exm_pts.':<10}{'tot_pts.':<10}{'grade':<10}")
+
 for student_id, name in students.items():
-    print(f"{"name":<30} {"exec_nbr":<10} {"exec_pts.":<10} {"exam_pts.":<10} {"tot_pts.":<10} {"grade":<10}")
     total = exams[student_id] + to_points(exercises[student_id])
-    print(f"{name:<30} {exec_nbr:<10} {exec_pts:<10} {exam_pts:<10} {tot_pts:<10}{ grade(total):<10}")
+    print(f"{name:<30}{exercises[student_id]:<10}{to_points(exercises[student_id]):<10}{exams[student_id]:<10}{total:<10}{grade(total):<10}")
