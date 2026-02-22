@@ -1,5 +1,4 @@
 def search_by_name(filename: str, word: str):
-
     with open(filename) as file:
         recipes_found_list = []
         for line in file:
@@ -7,6 +6,16 @@ def search_by_name(filename: str, word: str):
             if word.lower() in stripped_line:
                 recipes_found_list.append(line.strip())
         return recipes_found_list
+
+def search_by_time(filename: str, prep_time: int):
+    recipes_found = []
+
+    with open(filename) as file:
+        recipe_name = None
+        recipe_time = None
+
+        
+
 
 def main():
     if False:
@@ -19,6 +28,11 @@ def main():
 
     for recipe in found_recipes:
         print(recipe)
+    prep_time = "20"
+    found_recipes = search_by_time(recipes_file, prep_time)
+
+    print(found_recipes)
+        
 
 
 main()
