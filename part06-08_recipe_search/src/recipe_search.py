@@ -14,7 +14,29 @@ def search_by_time(filename: str, prep_time: int):
         recipe_name = None
         recipe_time = None
 
-        
+        for line in file:
+            stripped = line.strip()
+
+            if stripped == "":
+                if recipe_name and recipe_time and recipe_time <= prep_time:
+                    recipes_found.append(f"{recipe_name}, preparation time {recipe_time} min")
+                
+                recipe_name = None
+                recipe_time = None
+                continue
+            if recipe_name is None:
+                    recipe_name = stripped
+            elif recipe_time is None:
+                recipe_time = int(stripped)
+            else:
+                pass
+       
+        if recipe_name and recipe_time and recipe_time <= prep_time:
+                    recipes_found.append(f"{recipe_name}, preparation time {recipe_time} min")
+        return recipes_found
+
+
+
 
 
 def main():
@@ -28,7 +50,7 @@ def main():
 
     for recipe in found_recipes:
         print(recipe)
-    prep_time = "20"
+    prep_time = 20
     found_recipes = search_by_time(recipes_file, prep_time)
 
     print(found_recipes)
