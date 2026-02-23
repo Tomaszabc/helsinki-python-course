@@ -1,11 +1,26 @@
 def search_by_name(filename: str, word: str):
+    recipes_found_list = []
     with open(filename) as file:
-        recipes_found_list = []
+        recipe_name = None
+        
         for line in file:
-            stripped_line = line.strip().lower()
-            if word.lower() in stripped_line:
-                recipes_found_list.append(line.strip())
-        return recipes_found_list
+            stripped = line.strip()
+
+            if stripped == "":
+                if recipe_name and word.lower() in recipe_name.lower():
+                    recipes_found_list.append(recipe_name)
+                recipe_name = None
+                continue
+
+            if recipe_name is None:
+                recipe_name = stripped
+            else:
+                pass
+        
+        if recipe_name and word.lower() in recipe_name.lower():
+            recipes_found_list.append(recipe_name)
+    return recipes_found_list
+            
 
 def search_by_time(filename: str, prep_time: int):
     recipes_found = []
@@ -35,12 +50,40 @@ def search_by_time(filename: str, prep_time: int):
                     recipes_found.append(f"{recipe_name}, preparation time {recipe_time} min")
         return recipes_found
 
+def search_by_ingredient(filename: str, ingredient: str):
+    recipes_found = []
 
+    with open(filename) as file:
+        recipe_name = None 
+        recipe_time = None
+        ingredients = []
 
+        for line in file:
+            stripped = line.strip()
+
+            if stripped == "":
+                if recipe_name and recipe_time and ingredient.lower() in ingredients:
+                    recipes_found.append(f"{recipe_name}, preparation time {recipe_time} min")
+
+                recipe_name = None
+                recipe_time = None
+                ingredients = []
+                continue
+
+            if recipe_name is None:
+                recipe_name = stripped
+            elif recipe_time is None:
+                recipe_time = int(stripped)
+            else:
+                ingredients.append(stripped.lower())
+    if recipe_name and recipe_time and ingredient.lower() in ingredients:
+            recipes_found.append(f"{recipe_name}, preparation time {recipe_time} min")
+    
+    return recipes_found
 
 
 def main():
-    if False:
+    if True:
         recipes_file = input("recipes file: ")
     else:
         recipes_file = "recipes1.txt"
@@ -50,11 +93,17 @@ def main():
 
     for recipe in found_recipes:
         print(recipe)
+
     prep_time = 20
     found_recipes = search_by_time(recipes_file, prep_time)
 
-    print(found_recipes)
-        
+    for recipe in found_recipes:
+        print(recipe)
+
+    ingredient = "eggs"
+    found_recipes = search_by_ingredient(recipes_file, ingredient)
+    
+    for recipe in found_recipes:
+        print(recipe)
 
 
-main()
