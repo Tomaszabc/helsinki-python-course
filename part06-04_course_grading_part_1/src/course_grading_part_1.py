@@ -1,10 +1,12 @@
 def user_input():
-    if True:
+    if False:
         student_info = input("Student information: ")
         exercises_comp = input("Exercises completed: ")
+        exam_points = input("Exam points: ")
     else:
         student_info = "students1.csv"
         exercises_comp = "exercises1.csv"
+        exam_points = "exam_points1.csv"
 
 
     names = {}
