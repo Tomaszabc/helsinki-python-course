@@ -40,4 +40,3 @@ def row_sums():
         sums_list.append(sum(row))
     return sums_list
 
-read_matrix()

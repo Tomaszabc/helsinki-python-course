@@ -5,5 +5,4 @@ def store_personal_data(person: tuple):
     height = person[2]
 
     with open("people.csv", "a") as file:
-        file.write(f"{name};{age};{height}\n")
-
+        file.write(f"{name};{age};{height}")

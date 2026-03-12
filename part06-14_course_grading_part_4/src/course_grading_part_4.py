@@ -10,17 +10,29 @@ else:
     exercise_data = "src/exercises1.csv"
     exam_data = "src/exam_points1.csv"
     course_data = "src/course1.txt"
-  
-def get_grade(points):
+ 
+def grade(points):
     a = 0
     limits = [15, 18, 21, 24, 28]
     while a < 5 and points >= limits[a]:
         a += 1
     return a
  
-def as_score(number):
+def to_points(number):
     return number // 4
- 
+
+# Czytanie informacji o kursie
+course_name = ""
+course_credits = ""
+with open(course_data) as file:
+    for line in file:
+        line = line.strip()
+        if line.startswith("name:"):
+            course_name = line[5:].strip()
+        elif line.startswith("study credits:"):
+            course_credits = line[14:].strip()
+
+# Czytanie danych studentów
 students = {}
 with open(student_data) as file:
     for row in file:
@@ -29,6 +41,7 @@ with open(student_data) as file:
             continue
         students[parts[0]] = f"{parts[1]} {parts[2].strip()}"
  
+# Czytanie danych ćwiczeń
 exercises = {}
 with open(exercise_data) as file:
     for row in file:
@@ -40,6 +53,7 @@ with open(exercise_data) as file:
             esum += int(parts[i])
         exercises[parts[0]] = esum
  
+# Czytanie danych egzaminów
 exams = {}
 with open(exam_data) as file:
     for row in file:
@@ -51,32 +65,33 @@ with open(exam_data) as file:
             esum += int(parts[i])
         exams[parts[0]] = esum
 
-with open(course_data) as file:
-    rows = []
-    for row in file:
-        rows.append(row)
-
-    course_name = rows[0][5:].strip()
-    credits = int(rows[1][14:])
-
-with open("results.txt", "w") as file:
-    header = f"{course_name}, {credits} credits\n"
-    file.write(header)
-    separator = "="*(len(header)-1)
-    file.write(f"{separator}\n")
-    file.write("name                          exec_nbr  exec_pts. exm_pts.  tot_pts.  grade\n")
+# Zapisz do pliku results.txt
+with open("results.txt", "w") as txt_file:
+    # Nagłówek z informacjami o kursie
+    txt_file.write(f"{course_name}, {course_credits} credits\n")
+    txt_file.write("=" * 38 + "\n")
+    txt_file.write(f"{'name':<30}{'exec_nbr':<10}{'exec_pts.':<10}{'exm_pts.':<10}{'tot_pts.':<10}{'grade':<10}\n")
+    
+    # Dane dla każdego studenta
     for student_id, name in students.items():
-        exer = exercises[student_id]
-        exer_score = as_score(exer)
-        exam_pts = exams[student_id]
-        tot_score = exer_score + exam_pts
-        file.write(f"{name:30}{exer:<10}{exer_score:<10}{exam_pts:<10}{tot_score:<10}{get_grade(tot_score):<10}\n")
+        exercise_sum = exercises[student_id]
+        exercise_points = to_points(exercise_sum)
+        exam_points = exams[student_id]
+        total_points = exam_points + exercise_points
+        final_grade = grade(total_points)
+        
+        txt_file.write(f"{name:<30}{exercise_sum:<10}{exercise_points:<10}{exam_points:<10}{total_points:<10}{final_grade:<10}\n")
 
-with open("results.csv", "w") as file:
+# Zapisz do pliku results.csv
+with open("results.csv", "w") as csv_file:
     for student_id, name in students.items():
-        exer = exercises[student_id]
-        exer_score = as_score(exer)
-        exam_pts = exams[student_id]
-        tot_score = exer_score + exam_pts
-        row = ";".join([student_id, name, str(get_grade(tot_score))])
-        file.write(f"{row}\n")
+        exercise_sum = exercises[student_id]
+        exercise_points = to_points(exercise_sum)
+        exam_points = exams[student_id]
+        total_points = exam_points + exercise_points
+        final_grade = grade(total_points)
+        
+        csv_file.write(f"{student_id};{name};{final_grade}\n")
+
+# Komunikat dla użytkownika
+print("Results written to files results.txt and results.csv")
