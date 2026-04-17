@@ -5,7 +5,7 @@ def wordlist():
     with open("wordlist.txt") as file:
         for rivi in file:
             words.append(rivi.strip())
-        return words
+    return words
 
 words = wordlist()
 sentence = input("write text: ")
