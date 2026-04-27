@@ -3,12 +3,18 @@
 # from datetime import date
 from datetime import date
 
+
 def list_years(dates: list):
-    chronological = []
 
-    for i in dates:
-        year = i.year
-        chronological.append(year)
+    return sorted([d.year for d in dates])
 
-    chronological.sort()
-    return chronological
+
+# def list_years(dates: list):
+#     chronological = []
+
+#     for i in dates:
+#         year = i.year
+#         chronological.append(year)
+
+#     chronological.sort()
+#     return chronological
