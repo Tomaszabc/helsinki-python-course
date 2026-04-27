@@ -127,3 +127,16 @@ def get_value(operand, variables):
         return int(operand)
     else:
         return variables.get(operand, 0)
+
+if __name__ == "__main__":
+    program = []
+    print("Wpisz komendy (wpisz 'END' aby zakończyć):")
+    
+    while True:
+        line = input("> ")
+        program.append(line)
+        if line == "END":
+            break
+    
+    result = run(program)
+    print("Wynik:", result)
