@@ -20,3 +20,26 @@ class  NumberStats:
             return self.sum/self.count
         else:
             return 0
+
+#mai
+print("Please type in integer numbers:")
+all_stats = NumberStats()
+even_stats = NumberStats()
+odd_stats = NumberStats()
+
+while True:
+    number = int(input())
+    if number == -1:
+        break
+    all_stats.add_number(number)
+
+    if number % 2 == 0:
+        even_stats.add_number(number)
+    else:
+        odd_stats.add_number(number)
+
+print("Sum of numbers:", all_stats.get_sum())
+print("Mean of numbers:", all_stats.average())
+print("Sum of even numbers:", even_stats.get_sum())
+print("Sum of odd numbers:", odd_stats.get_sum())
+
