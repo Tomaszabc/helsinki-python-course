@@ -12,9 +12,11 @@ class  NumberStats:
     def count_numbers(self):
         return self.count
 
-stats = NumberStats()
-stats.add_number(3)
-stats.add_number(5)
-stats.add_number(1)
-stats.add_number(2)
-print("Numbers added:", stats.count_numbers())
+    def get_sum(self):
+        return self.sum
+    
+    def average(self):
+        if self.count != 0:
+            return self.sum/self.count
+        else:
+            return 0
