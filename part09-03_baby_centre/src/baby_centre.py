@@ -17,6 +17,10 @@ class BabyCentre:
         # return the weight of the person passed as an argument
         return person.weight
 
+    def feed(self, person: Person):
+        person.weight += 1
+
+
 
 
 
@@ -24,6 +28,14 @@ baby_centre = BabyCentre()
 
 eric = Person("Eric", 1, 110, 7)
 peter = Person("Peter", 33, 176, 85)
+
+print(f"{eric.name} weighs {baby_centre.weigh(eric)} kg")
+print(f"{peter.name} weighs {baby_centre.weigh(peter)} kg")
+print() 
+
+baby_centre.feed(eric)
+baby_centre.feed(eric)
+baby_centre.feed(eric)
 
 print(f"{eric.name} weighs {baby_centre.weigh(eric)} kg")
 print(f"{peter.name} weighs {baby_centre.weigh(peter)} kg")
