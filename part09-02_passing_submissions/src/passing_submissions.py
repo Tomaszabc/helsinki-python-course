@@ -11,11 +11,7 @@ class ExamSubmission:
 # # WRITE YOUR SOLUTION HERE:
 
 def passed(submissions: list, lowest_passing: int):
-    result = []
-    for submission in submissions:
-        if submission.points >= lowest_passing:
-            result.append(submission)
-    return result
+    return [sub for sub in submissions if sub.points >= lowest_passing]
 
 if __name__ == "__main__":
     s1 = ExamSubmission("Peter", 12)
