@@ -17,9 +17,8 @@ class RealProperty:
         compared_to_price = compared_to.square_metres * compared_to.price_per_sqm
         return abs(self_price - compared_to_price)
 
-central_studio = RealProperty(1, 16, 5500)
-downtown_two_bedroom = RealProperty(2, 38, 4200)
-suburbs_three_bedroom = RealProperty(3, 78, 2500)
+    def more_expensive(self, compared_to: "RealProperty"):
+        self_price = self.square_metres * self.price_per_sqm
+        compared_to_price = compared_to.square_metres * compared_to.price_per_sqm
+        return True if self_price > compared_to_price else False
 
-print(central_studio.price_difference(downtown_two_bedroom))
-print(suburbs_three_bedroom.price_difference(downtown_two_bedroom))
