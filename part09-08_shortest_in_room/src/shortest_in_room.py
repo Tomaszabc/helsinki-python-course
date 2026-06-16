@@ -18,13 +18,13 @@ class Room:
         return len(self.persons) == 0
 
     def print_contents(self):
-        if not self.is_empty = False:
+        if not self.is_empty:
             combined_height = 0
             for person in self.persons:
                 combined_height += person.height
             print(f"There are {len(self.persons)} persons in the room, and their combined height is {combined_height} cm")
             for person in self.persons:
-                print(person)
+                print(f"{person.name} ({person.height} cm)")
 
 
 
