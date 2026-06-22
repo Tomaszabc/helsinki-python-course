@@ -8,6 +8,8 @@ class Car:
         self.__petrol = 60
 
     def drive(self, km: int):
+        if km <= 0:
+            return
         if km > self.__petrol:
             km = self.__petrol
 
