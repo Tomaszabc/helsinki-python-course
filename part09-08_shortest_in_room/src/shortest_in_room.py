@@ -27,27 +27,22 @@ class Room:
                 print(f"{person.name} ({person.height} cm)")
 
     def shortest(self):
-        if self.is_empty():
-            return None
-
-        shortest = self.persons[0]
+        shortest_person = None
+        height_of_shortest = 0
         for person in self.persons:
-            if person.height < shortest.height:
-                shortest = person
-        return shortest
+            if shortest_person is None or person.height < height_of_shortest:
+                shortest_person = person
+                height_of_shortest = person.height
+        
+        return shortest_person
+
     
     def remove_shortest(self):
-        if self.is_empty():
-            return None
-        
-        shortest = self.persons[0]
-        for person in self.persons:
-            if person.height < shortest.height:
-                shortest = person
-        
-        self.persons.remove(shortest)
+        shortest_person = self.shortest()
+        if shortest_person:
+            self.persons.remove(shortest_person)
 
-        return shortest
+        return shortest_person
         
 
 
