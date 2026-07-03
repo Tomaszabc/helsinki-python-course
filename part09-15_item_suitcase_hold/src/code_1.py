@@ -33,11 +33,21 @@ class Suitcase():
             total += item.weight()
         return total
 
+    def heaviest_item(self):
+        if not self.__items:
+            return None
+
+        heaviest = self.__items[0]
+        for item in self.__items:
+            if item.weight() > heaviest.weight():
+                heaviest = item
+        return heaviest
+
     def __str__(self):
-        if self.__items_number != 1:
-            return f"{self.__items_number} items ({self.__weight} kg)"
+        if len(self.__items) == 1:
+            return f"1 item ({self.weight()} kg)"
         else:
-            return f"{self.__items_number} item ({self.__weight} kg)"
+            return f"{len(self.__items)} items ({self.weight()} kg)"
 
 book = Item("ABC Book", 2)
 phone = Item("Nokia 3210", 1)
@@ -48,7 +58,5 @@ suitcase.add_item(book)
 suitcase.add_item(phone)
 suitcase.add_item(brick)
 
-print("The suitcase contains the following items:")
-suitcase.print_items()
-combined_weight = suitcase.weight()
-print(f"Combined weight: {combined_weight} kg")
+heaviest = suitcase.heaviest_item()
+print(f"The heaviest item: {heaviest}")
