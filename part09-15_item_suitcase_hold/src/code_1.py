@@ -27,7 +27,10 @@ class Suitcase():
 
 
     def __str__(self):
-        return f"{self.__items_number} items ({self.__weight} kg)"
+        if self.__items_number != 1:
+            return f"{self.__items_number} items ({self.__weight} kg)"
+        else:
+            return f"{self.__items_number} item ({self.__weight} kg)"
 
 book = Item("ABC Book", 2)
 phone = Item("Nokia 3210", 1)
