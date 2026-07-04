@@ -5,7 +5,7 @@ class Item:
         self.__weight = weight
 
     def __str__(self):
-        return f"{self.__name}({self.__weight} kg)"
+        return f"{self.__name} ({self.__weight} kg)"
     
     def name(self):
         return self.__name
@@ -64,6 +64,32 @@ class CargoHold:
         if suitcase.weight() <= self.weight_left():
             self.__cargo.append(suitcase)
 
-    def __str__(self):
+    def print_items(self):
+        for suitcase in self.__cargo:
+            suitcase.print_items()
 
-        return f"{len(self.__cargo)} suitcases, space for {self.weight_left()} kg"
+
+    def __str__(self):
+        if len(self.__cargo) == 1:
+            return f"1 suitcase, space for {self.weight_left()} kg"
+        else:
+            return f"{len(self.__cargo)} suitcases, space for {self.weight_left()} kg"
+
+if __name__ == "__main__":
+    book = Item("ABC Book", 2)
+    phone = Item("Nokia 3210", 1)
+    brick = Item("Brick", 4)
+
+    adas_suitcase = Suitcase(10)
+    adas_suitcase.add_item(book)
+    adas_suitcase.add_item(phone)
+
+    peters_suitcase = Suitcase(10)
+    peters_suitcase.add_item(brick)
+
+    cargo_hold = CargoHold(1000)
+    cargo_hold.add_suitcase(adas_suitcase)
+    cargo_hold.add_suitcase(peters_suitcase)
+
+    print("The suitcases in the cargo hold contain the following items:")
+    cargo_hold.print_items()
