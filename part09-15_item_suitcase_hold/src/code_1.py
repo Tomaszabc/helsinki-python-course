@@ -49,14 +49,21 @@ class Suitcase():
         else:
             return f"{len(self.__items)} items ({self.weight()} kg)"
 
-book = Item("ABC Book", 2)
-phone = Item("Nokia 3210", 1)
-brick = Item("Brick", 4)
+class CargoHold:
+    def __init__(self, max_weight: float):
+        self.__max_weight = max_weight
+        self.__cargo = []
 
-suitcase = Suitcase(10)
-suitcase.add_item(book)
-suitcase.add_item(phone)
-suitcase.add_item(brick)
+    def weight_left(self):
+        total_weight = 0
+        for suitcase in self.__cargo:
+            total_weight += suitcase.weight()
+        return self.__max_weight - total_weight
 
-heaviest = suitcase.heaviest_item()
-print(f"The heaviest item: {heaviest}")
+    def add_suitcase(self, suitcase: Suitcase):
+        if suitcase.weight() <= self.weight_left():
+            self.__cargo.append(suitcase)
+
+    def __str__(self):
+
+        return f"{len(self.__cargo)} suitcases, space for {self.weight_left()} kg"
