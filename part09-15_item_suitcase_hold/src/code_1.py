@@ -25,7 +25,7 @@ class Suitcase():
    
     def print_items(self):
         for item in self.__items:
-            print(item.__str__())
+            print(item)
 
     def weight(self):
         total = 0
@@ -44,10 +44,8 @@ class Suitcase():
         return heaviest
 
     def __str__(self):
-        if len(self.__items) == 1:
-            return f"1 item ({self.weight()} kg)"
-        else:
-            return f"{len(self.__items)} items ({self.weight()} kg)"
+        end_s = "s" if len(self.__items) != 1 else ""
+        return f"{len(self.__items)} item{end_s} ({self.weight()} kg)"
 
 class CargoHold:
     def __init__(self, max_weight: float):
@@ -70,10 +68,8 @@ class CargoHold:
 
 
     def __str__(self):
-        if len(self.__cargo) == 1:
-            return f"1 suitcase, space for {self.weight_left()} kg"
-        else:
-            return f"{len(self.__cargo)} suitcases, space for {self.weight_left()} kg"
+        s = "s" if len(self.__cargo) != 1 else ""
+        return f"{len(self.__cargo)} suitcase{s}, space for {self.weight_left()} kg"
 
 if __name__ == "__main__":
     book = Item("ABC Book", 2)
