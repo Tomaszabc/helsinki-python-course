@@ -1,37 +1,37 @@
 # WRITE YOUR SOLUTION HERE:
-class ListHelper:   
-    # def __init__(self, my_list: list):
-    #     self.my_list = my_list
-    @classmethod
-    def greatest_frequency(cls, my_list: list):
-        counts = {}
-        for item in my_list:
-            if item in counts:
-                counts[item] += 1
-            else:
-                counts[item] = 1
+class WeatherStation:
+    def __init__(self, name: str):
+        self.__name = name
+        self.__observ = []
 
-        max_count = 0
-        most_common = None
-        for item, count in counts.items():
-            if count > max_count:
-                max_count = count
-                most_common = item
+        
 
-        return most_common
+    def add_observation(self, observation: str):
+        if observation != "":
+            self.__observ.append(observation)
+        else:
+            raise ValueError("must be a non empty string")
+    def latest_observation(self):
+        if len(self.__observ) > 0:
+            return self.__observ[-1]
+        else:
+            return ""
+    def number_of_observations(self):
+        return len(self.__observ)
 
-    @classmethod
-    def doubles(cls, my_list: list):
-        counts = {}
-        for item in my_list:
-            if item in counts:
-                counts[item] += 1
-            else:
-                counts[item] = 1
+    def __str__(self):
+        return f"{self.__name}, {len(self.__observ)} observations"
 
-        double_count = 0
+if __name__ == "__main__":
 
+    station = WeatherStation("Houston")
+    station.add_observation("Rain 10mm")
+    station.add_observation("Sunny")
+    print(station.latest_observation())
 
-numbers = [1, 1, 2, 1, 3, 3, 4, 5, 5, 5, 6, 5, 5, 5]
-print(ListHelper.greatest_frequency(numbers))
-print(ListHelper.doubles(numbers))
+    station.add_observation("Thunderstorm")
+    print(station.latest_observation())
+
+    print(station.number_of_observations())
+    print(station)
+
