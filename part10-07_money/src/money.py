@@ -5,4 +5,12 @@ class Money:
         self.cents = cents
 
     def __str__(self):
-        return f"{self.euros}.{self.cents}"
+        return f"{self.euros}.{self.cents:02d} eur"
+
+
+
+e1 = Money(4, 10)
+e2 = Money(2, 5)  # two euros and five cents
+
+print(e1)
+print(e2)
