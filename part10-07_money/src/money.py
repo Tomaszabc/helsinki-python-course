@@ -1,14 +1,13 @@
-# TEE RATKAISUSI TÄHÄN:
 class Money:
     def __init__(self, euros: int, cents: int):
-        self.euros = euros
-        self.cents = cents
+        self.__euros = euros
+        self.__cents = cents
 
     def __str__(self):
-        return f"{self.euros}.{self.cents:02d} eur"
+        return f"{self.__euros}.{self.__cents:02d} eur"
 
     def __value(self):
-        return self.euros * 100 + self.cents
+        return self.__euros * 100 + self.__cents
 
     def __eq__(self, another):
         return self.__value() == another.__value()
@@ -23,10 +22,19 @@ class Money:
         return self.__value() > another.__value()
 
     def __add__(self, another):
-        return self.__value() + another.__value()
+        total_cents = self.__value() + another.__value()
+        euros = total_cents // 100
+        cents = total_cents % 100
+        return Money(euros, cents)
 
     def __sub__(self, another):
-        return self.__value() - another.__value()
+        total_cents = self.__value() - another.__value()
+        if total_cents < 0:
+            raise ValueError("a negative result is not allowed")
+        euros = total_cents // 100
+        cents = total_cents % 100
+        return Money(euros, cents)
+
 
 
 if __name__ == "__main__":
@@ -39,5 +47,9 @@ if __name__ == "__main__":
     print(e3)
     print(e4)
 
-    e5 = e2-e1
+   
+
+    print(e1)
+    e1.__euros = 2000
+    print(e1)
     
