@@ -1,5 +1,26 @@
 
 # Write your solution here:
+class Person:
+    def __init__(self, name: str):
+        self.__name = name
+        self.__numbers = []
+        self.__address = None
+
+    def name(self):
+        return self.__name
+
+    def numbers(self):
+        return self.__numbers
+
+    def address(self):
+        return self.__address
+
+    def add_number(self, number: str):
+        self.__numbers.append(number)
+
+    def add_address(self, address: str):
+        self.__address = address
+
 class PhoneBook:
     def __init__(self):
         self.__persons = {}
@@ -57,5 +78,10 @@ class PhoneBookApplication:
 
 
 # when testing, no code should be outside application except the following:
-application = PhoneBookApplication()
-application.execute()
+# application = PhoneBookApplication()
+# application.execute()
+
+phonebook = PhoneBook()
+phonebook.add_number("Eric", "02-123456")
+print(phonebook.get_entry("Eric"))
+print(phonebook.get_entry("Emily"))
