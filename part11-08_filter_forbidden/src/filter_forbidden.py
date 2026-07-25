@@ -1,8 +1,11 @@
 # WRITE YOUR SOLUTION HERE:
 def filter_forbidden(string: str, forbidden: str):
-    return "".join([character for character in string if character not in forbidden])
+    # filtered_chars = [char for char in string if char not in forbidden]
+    # return "".join(filtered_chars)
+    string_split = [char for char in string]
+    return "".join([char for char in string_split if char not in forbidden])
 
-if __name__ == "__main__":
-    sentence = "Once! upon, a time: there was a python!??!?!"
-    filtered = filter_forbidden(sentence, "!?:,.")
-    print(filtered)
+
+sentence = "Once! upon, a time: there was a python!??!?!"
+filtered = filter_forbidden(sentence, "!?:,.")
+print(filtered)
