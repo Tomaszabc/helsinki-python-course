@@ -24,7 +24,8 @@ class RealProperty:
 
 # WRITE YOUR SOLUTION HERE:
 def cheaper_properties(properties: list, reference: RealProperty):
-    return [(a, (reference.price_per_sqm * reference.square_meters)-(a.price_per_sqm * a.square_meters)) for a in properties if (a.price_per_sqm * a.square_meters) < (reference.price_per_sqm * reference.square_meters)]
+    return [(real_property, real_property.price_difference(reference)) for real_property in properties if reference.more_expensive(real_property)]
+    # return [(a, (reference.price_per_sqm * reference.square_meters)-(a.price_per_sqm * a.square_meters)) for a in properties if (a.price_per_sqm * a.square_meters) < (reference.price_per_sqm * reference.square_meters)]
 
 
 if __name__ == "__main__":
