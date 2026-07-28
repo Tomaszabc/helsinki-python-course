@@ -2,18 +2,14 @@
 def recursive_sum(number: int):
     if number <= 1:
         return number
-    sum = 0
-    sum += number
-    number -= 1
-    if number == 1:
-        return sum + 1
-    else:
-        recursive_sum(number)
+    return number + recursive_sum(number - 1)
+    
 
 
+if __name__ == "__main__":
 
-result = recursive_sum(3)
-print(result)
+    result = recursive_sum(3)
+    print(result)
 
-print(recursive_sum(5))
-print(recursive_sum(10))
+    print(recursive_sum(5))
+    print(recursive_sum(10))
