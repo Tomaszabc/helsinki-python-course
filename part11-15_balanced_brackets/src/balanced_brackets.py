@@ -2,18 +2,35 @@
 def balanced_brackets(my_string: str):
     if len(my_string) == 0:
         return True
-    my_string_clean = [char for char in my_string if char in "()[]"]
-    if len(my_string_clean) == 0:
-        return True
+    
+    if not my_string[0] in "()[]":
+        return balanced_brackets(my_string[1:])
 
-    first = my_string_clean[0]
-    last = my_string_clean[-1]
+    if not my_string[-1] in "()[]":
+        return balanced_brackets(my_string[:-1])
 
-    if (first == '(' and last == ')') or (first == '[' and last == ']'):
-        remaining = my_string_clean[1:-1]
-        return balanced_brackets("".join(remaining))
-    else:
-        return False
+    if my_string[0] == "(" and my_string[-1] == ")":
+        return balanced_brackets(my_string[1:-1])
+    if my_string[0] == "[" and my_string[-1] == "]":
+            return balanced_brackets(my_string[1:-1])
+
+    return False
+
+
+
+    # my_string_clean = [char for char in my_string if char in "()[]"]
+    
+    # if len(my_string_clean) == 0:
+    #     return True
+
+    # first = my_string_clean[0]
+    # last = my_string_clean[-1]
+
+    # if (first == '(' and last == ')') or (first == '[' and last == ']'):
+    #     remaining = my_string_clean[1:-1]
+    #     return balanced_brackets("".join(remaining))
+    # else:
+    #     return False
 
 if __name__ == "__main__":
     ok = balanced_brackets("([([])])")
