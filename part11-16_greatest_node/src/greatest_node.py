@@ -6,21 +6,20 @@ class Node:
         self.left_child = left_child
         self.right_child = right_child
 
-def greatest_node(tree: "Node"):
-    greatest = tree.value
-    
-    if tree.left_child is not None:
-        left_greatest = greatest_node(tree.left_child)
-        if left_greatest > greatest:
-            greatest = left_greatest
-        
-    if tree.right_child is not None:
-        right_greatest = greatest_node(tree.right_child)
+def greatest_node(root: "Node"):
+    value = root.value
 
-        if right_greatest > greatest:
-            greatest = right_greatest
+    if root.left_child:
+        greatest_left = greatest_node(root.left_child)
+    else:
+        greatest_left = value
 
-    return greatest
+    if root.right_child:
+        greatest_right = greatest_node(root.right_child)
+    else:
+        greatest_right = value
+
+    return max(value, greatest_left, greatest_right)
 
 
 if __name__ == "__main__":
