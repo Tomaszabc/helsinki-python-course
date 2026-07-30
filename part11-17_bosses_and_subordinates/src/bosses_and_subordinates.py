@@ -9,7 +9,13 @@ class Employee:
 
 
 def count_subordinates(employee: Employee):
-    return len(employee.subordinates) + sum(count_subordinates(sub) for sub in employee.subordinates)
+    if employee is None:
+        return 0
+    no_of_subordinates = 0
+    for subordinate in employee.subordinates:
+        no_of_subordinates += count_subordinates(subordinate)+1
+    return no_of_subordinates
+
 
 
 
