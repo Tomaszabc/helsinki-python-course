@@ -26,7 +26,6 @@ class Task:
     
     def is_finished(self):
         return self.__is_finished
-        
 
     def mark_finished(self):
         self.__is_finished = True
@@ -36,16 +35,49 @@ class Task:
         status = "FINISHED" if self.__is_finished else "NOT FINISHED"
         return (f"{self.__id}: {self.__description} ({self.__workload} hours), programmer {self.__name} {status}")
 
+class OrderBook:
+    def __init__(self):
+        self.tasks = []
+
+    def add_order(self, description, programmer, workload):
+        order = Task(description, programmer, workload)
+        self.tasks.append(order)
+
+    def all_orders(self):
+        return self.tasks
+
+    def programmers(self):
+        seen = set()
+        result = []
+        for task in self.tasks:
+            if task.programmer not in seen:
+                seen.add(task.programmer)
+                result.append(task.programmer)
+        return result
+
 if __name__ == "__main__":
 
-    t1 = Task("program hello world", "Eric", 3)
-    print(t1.id, t1.description, t1.programmer, t1.workload)
-    print(t1)
-    print(t1.is_finished())
-    t1.mark_finished()
-    print(t1)
-    print(t1.is_finished())
-    t2 = Task("program webstore", "Adele", 10)
-    t3 = Task("program mobile app for workload accounting", "Eric", 25)
-    print(t2)
-    print(t3)
+    # t1 = Task("program hello world", "Eric", 3)
+    # print(t1.id, t1.description, t1.programmer, t1.workload)
+    # print(t1)
+    # print(t1.is_finished())
+    # t1.mark_finished()
+    # print(t1)
+    # print(t1.is_finished())
+    # t2 = Task("program webstore", "Adele", 10)
+    # t3 = Task("program mobile app for workload accounting", "Eric", 25)
+    # print(t2)
+    # print(t3)
+
+    orders = OrderBook()
+    orders.add_order("program webstore", "Adele", 10)
+    orders.add_order("program mobile app for workload accounting", "Eric", 25)
+    orders.add_order("program app for practising mathematics", "Adele", 100)
+
+    for order in orders.all_orders():
+        print(order)
+
+    print()
+
+    for programmer in orders.programmers():
+        print(programmer)
