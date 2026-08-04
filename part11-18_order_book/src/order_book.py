@@ -80,6 +80,29 @@ class OrderBook:
                 unfinished_list.append(task)
 
         return unfinished_list
+
+    def status_of_programmer(self, programmer: str):
+        finished = 0
+        unfinished = 0
+        hours_finished = 0
+        hours_unfinished = 0
+        found = False
+
+        for task in self.tasks:
+            if task.programmer == programmer:
+                found = True
+                if task.is_finished():
+                    finished += 1
+                    hours_finished += task.workload
+                else:
+                    unfinished += 1
+                    hours_unfinished += task.workload
+        if not found:
+            raise ValueError("no programmer")
+
+
+        
+        return finished, unfinished, hours_finished, hours_unfinished
   
 
 
@@ -110,13 +133,37 @@ if __name__ == "__main__":
     # for programmer in orders.programmers():
     #     print(programmer)
 
+    # orders = OrderBook()
+    # orders.add_order("program webstore", "Adele", 10)
+    # orders.add_order("program mobile app for workload accounting", "Eric", 25)
+    # orders.add_order("program app for practising mathematics", "Adele", 100)
+
+    # orders.mark_finished(1)
+    # orders.mark_finished(2)
+
+    # for order in orders.all_orders():
+    #     print(order)
+
+    # orders = OrderBook()
+    # orders.add_order("program webstore", "Adele", 10)
+    # orders.add_order("program mobile app for workload accounting", "Adele", 25)
+    # orders.add_order("program app for practising mathematics", "Adele", 100)
+    # orders.add_order("program the next facebook", "Eric", 1000)
+
+    # orders.mark_finished(1)
+    # orders.mark_finished(2)
+
+    # status = orders.status_of_programmer("Adele")
+    # print(status)
+
     orders = OrderBook()
     orders.add_order("program webstore", "Adele", 10)
-    orders.add_order("program mobile app for workload accounting", "Eric", 25)
+    orders.add_order("program mobile app for workload accounting", "Adele", 25)
     orders.add_order("program app for practising mathematics", "Adele", 100)
+    orders.add_order("program the next facebook", "Eric", 1000)
 
     orders.mark_finished(1)
     orders.mark_finished(2)
 
-    for order in orders.all_orders():
-        print(order)
+    status = orders.status_of_programmer("Adele")
+    print(status)
