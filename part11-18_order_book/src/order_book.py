@@ -17,9 +17,11 @@ class Task:
     @property
     def description(self):
         return self.__description
+
     @property 
     def programmer(self):
         return self.__name
+
     @property
     def workload(self):
         return self.__workload
@@ -55,6 +57,32 @@ class OrderBook:
                 result.append(task.programmer)
         return result
 
+
+    def mark_finished(self, id: int):
+        for task in self.tasks:
+            if task.id == id:
+                task.mark_finished()
+                return
+        raise ValueError("no id")
+
+    def finished_orders(self):
+        finished_list = []
+        for task in self.tasks:
+            if task.is_finished():
+                finished_list.append(task)
+
+        return finished_list
+
+    def unfinished_orders(self):
+        unfinished_list = []
+        for task in self.tasks:
+            if not task.is_finished():
+                unfinished_list.append(task)
+
+        return unfinished_list
+  
+
+
 if __name__ == "__main__":
 
     # t1 = Task("program hello world", "Eric", 3)
@@ -69,15 +97,26 @@ if __name__ == "__main__":
     # print(t2)
     # print(t3)
 
+    # orders = OrderBook()
+    # orders.add_order("program webstore", "Adele", 10)
+    # orders.add_order("program mobile app for workload accounting", "Eric", 25)
+    # orders.add_order("program app for practising mathematics", "Adele", 100)
+
+    # for order in orders.all_orders():
+    #     print(order)
+
+    # print()
+
+    # for programmer in orders.programmers():
+    #     print(programmer)
+
     orders = OrderBook()
     orders.add_order("program webstore", "Adele", 10)
     orders.add_order("program mobile app for workload accounting", "Eric", 25)
     orders.add_order("program app for practising mathematics", "Adele", 100)
 
+    orders.mark_finished(1)
+    orders.mark_finished(2)
+
     for order in orders.all_orders():
         print(order)
-
-    print()
-
-    for programmer in orders.programmers():
-        print(programmer)
