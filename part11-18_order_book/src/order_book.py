@@ -1,108 +1,146 @@
-# Write your solution here:
+# # Write your solution here:
 class Task:
-    id_counter = 0
+    id = 0
+    @classmethod
+    def new_id(cls):
+        Task.id += 1
+        return Task.id
 
-    def __init__(self, description: str, name: str, workload: int):
-        self.__description = description
-        self.__workload = workload
-        self.__name = name 
-        Task.id_counter += 1
-        self.__id = Task.id_counter
-        self.__is_finished = False
-
-    @property
-    def id(self):
-        return self.__id
-
-    @property
-    def description(self):
-        return self.__description
-
-    @property 
-    def programmer(self):
-        return self.__name
-
-    @property
-    def workload(self):
-        return self.__workload
+    def __init__(self, description, programmer, workload):
+        self.programmer = programmer
+        self.description = description
+        self.workload = workload 
+        self.id = Task.new_id()
+        self.finished = False
     
     def is_finished(self):
-        return self.__is_finished
+        return self.finished
 
     def mark_finished(self):
-        self.__is_finished = True
-        return self.__is_finished
+        self.finished = True
 
     def __str__(self):
-        status = "FINISHED" if self.__is_finished else "NOT FINISHED"
-        return (f"{self.__id}: {self.__description} ({self.__workload} hours), programmer {self.__name} {status}")
+        status = "NOT FINISHED" if not self.finished else "FINISHED"
+        return f"{self.id}: {self.description} ({self.workload} hours), programmer {self.programmer} {status}"
+
 
 class OrderBook:
     def __init__(self):
-        self.tasks = []
+        self.__tasks = []
 
     def add_order(self, description, programmer, workload):
-        order = Task(description, programmer, workload)
-        self.tasks.append(order)
+        self.__tasks.append(Task(description, programmer, workload))
 
     def all_orders(self):
-        return self.tasks
+        return self.__tasks
 
     def programmers(self):
-        seen = set()
-        result = []
-        for task in self.tasks:
-            if task.programmer not in seen:
-                seen.add(task.programmer)
-                result.append(task.programmer)
-        return result
+        return list(set[t.programmer for t in self.__tasks])
+
+# class Task:
+#     id_counter = 0
+
+#     def __init__(self, description: str, name: str, workload: int):
+#         self.__description = description
+#         self.__workload = workload
+#         self.__name = name 
+#         Task.id_counter += 1
+#         self.__id = Task.id_counter
+#         self.__is_finished = False
+
+#     @property
+#     def id(self):
+#         return self.__id
+
+#     @property
+#     def description(self):
+#         return self.__description
+
+#     @property 
+#     def programmer(self):
+#         return self.__name
+
+#     @property
+#     def workload(self):
+#         return self.__workload
+    
+#     def is_finished(self):
+#         return self.__is_finished
+
+#     def mark_finished(self):
+#         self.__is_finished = True
+#         return self.__is_finished
+
+#     def __str__(self):
+#         status = "FINISHED" if self.__is_finished else "NOT FINISHED"
+#         return (f"{self.__id}: {self.__description} ({self.__workload} hours), programmer {self.__name} {status}")
+
+# class OrderBook:
+#     def __init__(self):
+#         self.tasks = []
+
+#     def add_order(self, description, programmer, workload):
+#         order = Task(description, programmer, workload)
+#         self.tasks.append(order)
+
+#     def all_orders(self):
+#         return self.tasks
+
+#     def programmers(self):
+#         seen = set()
+#         result = []
+#         for task in self.tasks:
+#             if task.programmer not in seen:
+#                 seen.add(task.programmer)
+#                 result.append(task.programmer)
+#         return result
 
 
-    def mark_finished(self, id: int):
-        for task in self.tasks:
-            if task.id == id:
-                task.mark_finished()
-                return
-        raise ValueError("no id")
+#     def mark_finished(self, id: int):
+#         for task in self.tasks:
+#             if task.id == id:
+#                 task.mark_finished()
+#                 return
+#         raise ValueError("no id")
 
-    def finished_orders(self):
-        finished_list = []
-        for task in self.tasks:
-            if task.is_finished():
-                finished_list.append(task)
+#     def finished_orders(self):
+#         finished_list = []
+#         for task in self.tasks:
+#             if task.is_finished():
+#                 finished_list.append(task)
 
-        return finished_list
+#         return finished_list
 
-    def unfinished_orders(self):
-        unfinished_list = []
-        for task in self.tasks:
-            if not task.is_finished():
-                unfinished_list.append(task)
+#     def unfinished_orders(self):
+#         unfinished_list = []
+#         for task in self.tasks:
+#             if not task.is_finished():
+#                 unfinished_list.append(task)
 
-        return unfinished_list
+#         return unfinished_list
 
-    def status_of_programmer(self, programmer: str):
-        finished = 0
-        unfinished = 0
-        hours_finished = 0
-        hours_unfinished = 0
-        found = False
+#     def status_of_programmer(self, programmer: str):
+#         finished = 0
+#         unfinished = 0
+#         hours_finished = 0
+#         hours_unfinished = 0
+#         found = False
 
-        for task in self.tasks:
-            if task.programmer == programmer:
-                found = True
-                if task.is_finished():
-                    finished += 1
-                    hours_finished += task.workload
-                else:
-                    unfinished += 1
-                    hours_unfinished += task.workload
-        if not found:
-            raise ValueError("no programmer")
+#         for task in self.tasks:
+#             if task.programmer == programmer:
+#                 found = True
+#                 if task.is_finished():
+#                     finished += 1
+#                     hours_finished += task.workload
+#                 else:
+#                     unfinished += 1
+#                     hours_unfinished += task.workload
+#         if not found:
+#             raise ValueError("no programmer")
 
 
         
-        return finished, unfinished, hours_finished, hours_unfinished
+#         return finished, unfinished, hours_finished, hours_unfinished
   
 
 
