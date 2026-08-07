@@ -30,3 +30,29 @@ class ClimbingArea:
         hardest_route = self.hardest_route()
         return f"{self.name} {self.routes()} routes, hardest {hardest_route.grade}"
 
+def sort_by_number_of_routes(areas):
+    def number_of_routes(area):
+        return area.routes()
+    return sorted(areas, key=number_of_routes)
+
+if __name__ == "__main__":
+    ca1 = ClimbingArea("Olhava")
+    ca1.add_route(ClimbingRoute("Edge", 38, "6A+"))
+    ca1.add_route(ClimbingRoute("Great cut", 36, "6B"))
+    ca1.add_route(ClimbingRoute("Swedish route", 42, "5+"))
+
+    ca2 = ClimbingArea("Nummi")
+    ca2.add_route(ClimbingRoute("Synchro", 14, "8C+"))
+
+    ca3 = ClimbingArea("Nalkkila slab")
+    ca3.add_route(ClimbingRoute("Small steps", 12, "6A+"))
+    ca3.add_route(ClimbingRoute("Smooth operator", 11, "7A"))
+    ca3.add_route(ClimbingRoute("Piggy not likey", 12 , "6B+"))
+    ca3.add_route(ClimbingRoute("Orchard", 8, "6A"))
+
+    # print(ca1)
+    # print(ca3.name, ca3.routes())
+    # print(ca3.hardest_route())
+    areas = [ca1, ca2, ca3]
+    for area in sort_by_number_of_routes(areas):
+        print(area)
