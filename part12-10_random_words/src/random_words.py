@@ -1,10 +1,13 @@
 # Write your solution here:
-import random
+# import random
+from random import choice
 
+def word_generator(letters: str, length: int, amount: int):
+    return ("".join([choice(letters ) for i in range(length)]) for j in range(amount))
 
-def word_generator(characters: str, length: int, amount: int):
-    for _ in range(amount):
-        yield ''.join(random.choice(characters) for _ in range(length))
+# def word_generator(characters: str, length: int, amount: int):
+#     for _ in range(amount):
+#         yield ''.join(random.choice(characters) for _ in range(length))
 
 
 
