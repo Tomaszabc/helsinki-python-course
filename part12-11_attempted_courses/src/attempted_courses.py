@@ -12,6 +12,10 @@ class CourseAttempt:
 def names_of_students(attempts: list):
     return map(lambda t: t.student_name, attempts)
 
+def course_names(attempts: list):
+    return sorted(set(map(lambda t: t.course_name, attempts)))
+
+
 
 
 # attempt = CourseAttempt("Peter Python", "Introduction to Programming", 5)
@@ -20,9 +24,16 @@ def names_of_students(attempts: list):
 # print(attempt.grade)
 # print(attempt)
 
-s1 = CourseAttempt("Peter Python", "Introduction to Programming", 3)
-s2 = CourseAttempt("Olivia C. Objective", "Introduction to Programming", 5)
-s3 = CourseAttempt("Peter Python", "Advanced Course in Programming", 2)
+# s1 = CourseAttempt("Peter Python", "Introduction to Programming", 3)
+# s2 = CourseAttempt("Olivia C. Objective", "Introduction to Programming", 5)
+# s3 = CourseAttempt("Peter Python", "Advanced Course in Programming", 2)
 
-for name in names_of_students([s1, s2, s3]):
-    print(name)
+# for name in names_of_students([s1, s2, s3]):
+#     print(name)
+
+# s1 = CourseAttempt("Peter Python", "Introduction to Programming", 3)
+# s2 = CourseAttempt("Olivia C. Objective", "Introduction to Programming", 5)
+# s3 = CourseAttempt("Peter Python", "Advanced Course in Programming", 2)
+
+# for name in course_names([s1, s2, s3]):
+#     print(name)
