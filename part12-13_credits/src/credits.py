@@ -16,21 +16,27 @@ class CourseAttempt:
 # def sum_of_all_credits(attempts: list):
 #     return reduce(sum_of_all_credits_helper, attempts, 0)
 
+def credit_summer(cr_sum, attempt):
+    return cr_sum + attempt.credits
+
 def sum_of_all_credits(attempts: list):
-    return reduce(lambda total, attempt: total + attempt.credits, attempts, 0)
+    return reduce(credit_summer, attempts, 0)
 
 def sum_of_passed_credits(attempts: list):
     passed = filter(lambda x: x.grade > 0, attempts)
-    return reduce(lambda total, attempt: total + attempt.credits, passed, 0)
+    return reduce(credit_summer, passed, 0)
 
 
 def average(attempts: list):
-    passed = list(filter(lambda x: x.grade > 0, attempts))
-    if not passed:
-        return 0
-    
-    total_grades = reduce(lambda total, attempt: total + attempt.grade, passed, 0)
-    return total_grades / len(passed)
+    def grade_summer(cr_sum, attempt):
+        return cr_sum + attempt.grade
+
+    accepted = list(filter(lambda s: s.grade > 0, attempts))
+    sum_of_grades = reduce(grade_summer, accepted, 0)
+
+    return sum_of_grades / len(accepted)
+
+
 
 if __name__ == "__main__":
 
