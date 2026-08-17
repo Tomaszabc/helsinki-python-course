@@ -10,3 +10,19 @@ class CourseAttempt:
         return f"{self.course_name} ({self.credits} cr) grade {self.grade}"
 
 # Write your solution
+# def sum_of_all_credits_helper(credit_sum, attempt):
+#     return credit_sum + attempt.credits
+
+# def sum_of_all_credits(attempts: list):
+#     return reduce(sum_of_all_credits_helper, attempts, 0)
+
+def sum_of_all_credits(attempts: list):
+    return reduce(lambda total, attempt: total + attempt.credits, attempts, 0)
+
+
+
+s1 = CourseAttempt("Introduction to Programming", 5, 5)
+s2 = CourseAttempt("Advanced Course in Programming", 4, 5)
+s3 = CourseAttempt("Data Structures and Algorithms", 3, 10)
+credit_sum = sum_of_all_credits([s1, s2, s3])
+print(credit_sum)
