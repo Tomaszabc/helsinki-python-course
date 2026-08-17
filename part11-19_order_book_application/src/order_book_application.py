@@ -69,14 +69,16 @@ class OrderBookApplication:
         self.__order_book = OrderBook()
 
     def help(self):
-        print("commands:")
-        print("0 exit")
-        print("1 add order")
-        print("2 list finished tasks")
-        print("3 list unfinished tasks")
-        print("4 mark task as finished")
-        print("5 programmers")
-        print("6 status of programmer")
+        instructions_str = """
+commands:
+0 exit
+1 add order
+2 list finished tasks
+3 list unfinished tasks
+4 mark task as finished
+5 programmers
+6 status of programmer"""
+        print(instructions_str)
 
     def add_order(self):
         description = input("description: ")
