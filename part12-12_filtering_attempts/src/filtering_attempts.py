@@ -7,6 +7,7 @@ class CourseAttempt:
     def __str__(self):
         return f"{self.student_name}, grade for the course {self.course_name} {self.grade}"
 
+
 # 1. Accepted attempts (grade >= 1)
 def accepted(attempts: list):
     return list(filter(lambda x: x.grade >= 1, attempts))
@@ -55,3 +56,4 @@ if __name__ == "__main__":
     print("Students who passed Introduction to AI:")
     for attempt in passed_students([s1, s2, s3, s4], "Introduction to AI"):
         print(attempt)
+
