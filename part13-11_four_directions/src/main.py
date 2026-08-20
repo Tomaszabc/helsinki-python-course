@@ -15,6 +15,10 @@ while True:
                 x -= 10
             if event.key == pygame.K_RIGHT:
                 x += 10
+            if event.key == pygame.K_DOWN:
+                y += 10
+            if event.key == pygame.K_UP:
+                y -= 10
 
         if event.type == pygame.QUIT:
             exit()
